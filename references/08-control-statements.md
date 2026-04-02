@@ -2,6 +2,7 @@
 
 ## CS-001: switch完整性
 **规则**：switch语句必须包含default分支
+**严重程度**：警告
 **检查逻辑**：switch没有default
 **正确示例**：
 ```java
@@ -34,6 +35,7 @@ switch (status) {
 
 ## CS-002: switch穿透
 **规则**：switch的case执行后必须有break或return
+**严重程度**：警告
 **检查逻辑**：case中缺少break/return导致穿透
 **正确示例**：
 ```java
@@ -43,7 +45,7 @@ switch (type) {
         break;
     case B:
         doB();
-        return;  // return也可以
+        return;
     default:
         doDefault();
 }
@@ -64,6 +66,7 @@ switch (type) {
 
 ## CS-003: 条件布尔化
 **规则**：禁止if条件是true/false
+**严重程度**：严重
 **检查逻辑**：if语句条件为true或false
 **正确示例**：
 ```java
@@ -83,6 +86,7 @@ if (true) {  // 或 false
 
 ## CS-004: 复杂条件表达式
 **规则**：复杂条件表达式应提取为boolean变量
+**严重程度**：提示
 **检查逻辑**：if条件超过3个逻辑运算符
 **正确示例**：
 ```java
@@ -104,8 +108,28 @@ if (order != null && order.getStatus() == Status.PAID && order.getAmount() > 0 &
 
 ---
 
-## CS-005: 循环终止条件
+## CS-005: 禁止单行控制语句
+**规则**：禁止if/for/while/do使用单行语句
+**严重程度**：警告
+**检查逻辑**：if/for/while后直接跟单行语句
+**正确示例**：
+```java
+if (condition) {
+    count++;
+}
+```
+**错误示例**：
+```java
+if (condition)
+    count++;
+```
+**修复建议**：使用大括号包围
+
+---
+
+## CS-006: 循环终止条件
 **规则**：禁止在循环体内修改循环计数器
+**严重程度**：警告
 **检查逻辑**：循环体内修改for循环的i++
 **正确示例**：
 ```java
@@ -125,8 +149,9 @@ for (int i = 0; i < list.size(); i++) {
 
 ---
 
-## CS-006: return与finally
+## CS-007: return与finally
 **规则**：finally中不执行return
+**严重程度**：严重
 **检查逻辑**：finally块中有return语句
 **正确示例**：
 ```java
@@ -148,8 +173,9 @@ try {
 
 ---
 
-## CS-007: 条件嵌套
+## CS-008: 条件嵌套
 **规则**：避免多层条件嵌套，使用卫语句提前返回
+**严重程度**：提示
 **检查逻辑**：if嵌套超过3层
 **正确示例**：
 ```java
@@ -181,8 +207,9 @@ public void process(Order order) {
 
 ---
 
-## CS-008: try-catch范围
+## CS-009: try-catch范围
 **规则**：try-catch中的代码范围应尽可能小
+**严重程度**：提示
 **检查逻辑**：try块包含过多不相关的操作
 **正确示例**：
 ```java
