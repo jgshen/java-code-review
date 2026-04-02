@@ -1,4 +1,4 @@
-# Java代码审查
+# Java代码审查.skill
 
 > *"好的代码本身就是最好的文档。"* — Martin Fowler
 
